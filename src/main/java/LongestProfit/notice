@@ -1,0 +1,16 @@
+You are given an array of integers, which represent the monthly net profits of a company.
+The company wants you to look for the longest sequence of chronologically ordered months
+that have increasing profit, and return the length. The sequence can include non-adjacent months.
+
+Implement the function longestProfit(data) which takes as input an array of integers (data),
+representing a given set of consecutive monthly profit values.
+
+An example input would look like this:
+[-1, 9, 0, 8, -5, 6, -24]
+
+Your longestProfit function should return an integer representing the longest sequence of increasing
+monthly profits. For the example input above, the function should return 3, as the longest sequence.
+
+The sequence could be any of the following:
+[-1, 0, 8]
+[-1, 0, 6]

@@ -1,0 +1,87 @@
+Brute Force :
+
+/*
+ Time complexity: O(n²)
+ Space complexity: O(1)
+  */
+ public static Object bruteForce(Object[] input) {
+     for (int i = 0; i < input.length; i++) {
+         int count = 0;
+
+         for (int j = 0; j < input.length; j++) {
+             if (input[i].equals(input[j])) {
+                 ++count;
+             }
+         }
+
+         if (count > input.length / 2) {
+             return input[i];
+         }
+     }
+
+     return null;
+ }
+
+ Hashmap :
+
+ /*
+         Time complexity: O(n) without the stream API
+         Space complexity: O(n)
+     */
+     public static Object hashMap(Object[] input) {
+         Map<Object, Long> map = new HashMap<>();
+
+         for (int i = 0; i < input.length; i++) {
+             map.merge(input[i], 1L, Long::sum);
+
+             if(map.get(input[i]) > input.length / 2) {
+                 return input[i];
+             }
+         }
+
+         return null;
+     }
+hashmap streams
+
+/*
+Time complexity: O(2 * n) with the stream API, still linear time
+Space complexity: O(n)
+ */
+public static Object hashMapStream(Object[] input) {
+    return Arrays.stream(input).collect(Collectors.groupingBy(e -> e, Collectors.counting()))
+            .entrySet().stream()
+            .filter(e -> e.getValue() > input.length / 2)
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .orElse(null);
+}
+Boyer-Moore
+
+/*
+https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm
+Time complexity: O(n log n)
+Space complexity: O(1)
+ */
+public static Object boyerMooreMajorityVote(Object[] input) {
+    // find candidate
+    int candidateIndex = 0;
+    int count = 1;
+
+    for (int i = 1; i < input.length; i++) {
+        if(input[i].equals(input[candidateIndex])) {
+            ++count;
+        } else {
+            --count;
+        }
+
+        if(count == 0) {
+            candidateIndex = i;
+            count = 1;
+        }
+        }
+
+    Object candidate = input[candidateIndex];
+
+    // check if candidate is majority element
+    return Arrays.stream(input).filter(e -> e.equals(candidate)).count() > input.length / 2 ? candidate : null;
+}

@@ -1,0 +1,12 @@
+Implement a function that finds the majority element in a list. A majority element in a list of size n is an element that appears more than n/2 times (and hence there is at most one such element).
+
+Example :
+Input : A=[3, 4, 2, 4, 4, 2, 4, 4]
+Output : 4
+Explanation: The frequency of 4 is 5 which is greater than the half of the size of the list size.
+
+Input : A = ["c", "c", "d", "b", "d", "d", "b", "d"]
+Output : No Majority Element
+Explanation: There is no element whose frequency is greater than the half of the size of the array size.
+
+Assume that your implementation will be part of a library used by many other applications.
